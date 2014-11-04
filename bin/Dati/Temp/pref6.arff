@@ -1,0 +1,15 @@
+@relation rel
+@attribute movieId INTEGER
+@attribute occ INTEGER
+
+@data
+3145, 141
+3892, 113
+1645, 108
+1763, 105
+1088, 104
+456, 103
+1190, 101
+2607, 99
+2248, 98
+2215, 97
