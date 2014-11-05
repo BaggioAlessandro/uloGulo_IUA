@@ -1,0 +1,8 @@
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\bin\Debug\RecSys-1.0.exe
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\bin\Debug\RecSys-1.0.pdb
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\obj\x86\Debug\RecSys_1._0.Form1.resources
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\obj\x86\Debug\RecSys_1._0.Properties.Resources.resources
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\obj\x86\Debug\RecSys-1.0.csproj.GenerateResource.Cache
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\obj\x86\Debug\RecSys-1.0.exe
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\obj\x86\Debug\RecSys-1.0.pdb
+C:\Users\ASUS\Desktop\AUI_Cremonesi\uloGulo_IUA\RecSys\RecSys-1.0\obj\x86\Debug\RecSys-1.0.csprojResolveAssemblyReference.cache
