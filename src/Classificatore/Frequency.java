@@ -4,6 +4,7 @@ public class Frequency implements Comparable<Frequency> {
 
 	public int film_id;
 	public int occ;
+	public float freq;
 	
 	public Frequency(int id){
 		film_id = id;
@@ -15,8 +16,12 @@ public class Frequency implements Comparable<Frequency> {
 	}
 	
 	public String toString(){
-		String output = new String(film_id + ", " + occ);
+		String output = new String(film_id + ", " + occ+ ", " + freq);
 		return output;
+	}
+	
+	public void calcFreq(int num){
+		freq = (float)occ/num;
 	}
 
 	@Override

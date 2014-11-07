@@ -6,6 +6,37 @@ import weka.core.Instances;
 
 public class Most_popular {
 	
+	public static Frequency[] calc_frequency_relevant(Instances data) throws Exception{
+		
+		
+		//DataSource join = new DataSource("/src/Dati/super-joinsenzaGenere.arff");
+		
+		String film_source = new String("src/Dati/movieMeta+anno.arff");
+		Instances film = Roba_utile.load(film_source);
+		
+		Frequency[] table = new Frequency[(int)film.lastInstance().value(0)];
+		
+		for(int i = 1; i <= table.length; i++){
+			table[i-1] = new Frequency(i);
+		}
+		
+		//calcolo occorrenze sopra il 4
+		for(int i = 0; i < data.numInstances(); i++){
+			if(data.instance(i).value(4) >= 4){
+				table[ (int) data.instance(i).value(0)-1].add_occ();
+				
+			}
+		}
+		
+		Arrays.sort(table);
+		//calcolo frequenza
+		for(int i = 0; i <= table.length; i++){
+			table[i].calcFreq(data.numInstances());
+		}
+		
+		return table;
+	}
+	
 	public static Frequency[] calc_frequency(Instances data) throws Exception{
 		
 		
@@ -20,17 +51,20 @@ public class Most_popular {
 			table[i-1] = new Frequency(i);
 		}
 		
+		//calcolo occorrenze
 		for(int i = 0; i < data.numInstances(); i++){
-			if(data.instance(i).value(4) >= 4){
-				table[ (int) data.instance(i).value(0)-1].add_occ();
-				
-			}
+			table[ (int) data.instance(i).value(0)-1].add_occ();
 		}
 		
 		Arrays.sort(table);
+		//calcolo frequenza
+		for(int i = 0; i < table.length; i++){
+			table[i].calcFreq(data.numInstances());
+		}
+		
 		return table;
 	}
-	
+
 	public static Instances[] genere_split(Instances data) throws Exception{
 		int splits = 2;
 		int att_genere = 5;
@@ -109,6 +143,28 @@ public class Most_popular {
 				split[5].add(data.instance(i));
 		}
 		
+		return split;
+	}
+	
+	public static Instances[] occupation_split(Instances data) throws Exception{
+		int splits = 21;
+		int attr_occupation = 7;
+		
+		//data structure
+		FastVector fv = new FastVector(data.numAttributes());
+		for(int i = 0; i < data.numAttributes(); i++){
+			fv.addElement(data.attribute(i));
+		}
+		
+		Instances[] split = new Instances[splits];
+		for(int i = 0; i < split.length; i++){
+			split[i] = new Instances("rel", fv, data.numInstances()/5);
+		}
+		
+		for(int i = 0; i < data.numInstances(); i++ ){
+			split[(int)data.instance(i).value(attr_occupation)].add(data.instance(i));		
+		}
+				
 		return split;
 	}
 }
