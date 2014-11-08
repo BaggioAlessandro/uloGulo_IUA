@@ -30,7 +30,7 @@ public class Most_popular {
 		
 		Arrays.sort(table);
 		//calcolo frequenza
-		for(int i = 0; i <= table.length; i++){
+		for(int i = 0; i < table.length; i++){
 			table[i].calcFreq(data.numInstances());
 		}
 		

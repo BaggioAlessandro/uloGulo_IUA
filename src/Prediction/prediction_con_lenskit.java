@@ -16,7 +16,7 @@ public class prediction_con_lenskit {
 	public static void main(String[] args) throws Exception {
 		int split = 2;
 		int numRec = 5;
-		int numCandidates = 10; 
+		int numCandidates = 7; 
 		String user_path = new String("src/Dati/test_user.arff");
 		String training = new String("src/Dati/super-joinsenzaGenere2.arff");
 		String sample_path = new String("src/Dati/Submission/sampleSubmission.arff");
@@ -32,9 +32,12 @@ public class prediction_con_lenskit {
 		for(int i = 0; i < split; i++){
 			popular[i] = new String("src/Dati/Temp/pref" + i + ".arff");
 			popular_data[i] = Roba_utile.load(popular[i]);
-			for(int j = numCandidates; j < popular_data[i].numInstances(); j++){
+			System.out.println(popular_data[i].numInstances());
+			for(int j = numCandidates; j < popular_data[i].numInstances();){
 				popular_data[i].delete(j);
 			}
+			System.out.println(popular_data[i]);
+			
 		}
 		
 		PredittoreLenskit pred = new PredittoreLenskit(new File("src/Dati/train.csv"), new String("src/Dati/test.arff"));
@@ -48,6 +51,7 @@ public class prediction_con_lenskit {
 			for(int j = 0; j < popular_data[i].numInstances(); j++){
 				candidates.get(i).add((long)popular_data[i].instance(j).value(0) );
 			}
+			
 		}
 		
 		for(int i = 0; i < user_data.numInstances(); i++){

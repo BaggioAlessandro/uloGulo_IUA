@@ -11,7 +11,7 @@ import weka.core.Instances;
 public class main {
 
 	public static void main(String[] args) throws Exception {
-		int topN = 10;
+		int topN = 30;
 		String training = new String("src/Dati/super-joinsenzaGenere2.arff");
 		Instances data = Roba_utile.load(training);
 		
@@ -19,7 +19,7 @@ public class main {
 		ArrayList<Frequency[]> popular = new ArrayList<Frequency[]>();
 		
 		for(int i = 0; i < split.length; i++){
-			popular.add(Most_popular.calc_frequency(split[i]));
+			popular.add(Most_popular.calc_frequency_relevant(split[i]));
 		}
 		
 		write(popular, topN);
