@@ -1,0 +1,139 @@
+.TH "lenskit\-predict" "1" "" "2.1" "LensKit"
+.SH NAME
+.PP
+\f[B]lenskit predict\f[] \- predict user ratings of items.
+.SH SYNOPSIS
+.PP
+\f[B]lenskit\f[] [GLOBAL OPTIONS] \f[B]predict\f[] [OPTIONS]
+\f[I]USER\f[] \f[I]ITEM\f[]...
+.SH DESCRIPTION
+.PP
+The \f[C]predict\f[] command predicts a user\[aq]s ratings for some
+items.
+It loads a recommender from a trained model file and/or LensKit
+configuration scripts and uses the configured algorithm to produce
+rating predictions.
+.SH OPTIONS
+.TP
+.B \f[I]USER\f[]
+The user ID for whom to generate predictions.
+.RS
+.RE
+.TP
+.B \f[I]ITEM\f[]
+An item ID to predict for.
+.RS
+.RE
+.TP
+.B \-\-help
+Show usage help.
+.RS
+.RE
+.TP
+.B \-m \f[I]FILE\f[], \-\-model\-file \f[I]FILE\f[]
+Load a trained recommender engine from \f[I]FILE\f[].
+.RS
+.RE
+.TP
+.B \-c \f[I]SCRIPT\f[], \-\-config\-file \f[I]SCRIPT\f[]
+Configure the recommender using \f[I]SCRIPT\f[].
+This option can be specified multiple times, and later configurations
+take precedence over earlier ones.
+If \f[C]\-\-model\-file\f[] is also specified, the scripts are used to
+modify the trained model.
+.RS
+.RE
+.TP
+.B \-\-print\-channel \f[I]CHAN\f[]
+In addition to rating predictions, also print the value in side channel
+\f[I]CHAN\f[].
+.RS
+.RE
+.SS Input Data Options
+.PP
+This command can read data in several different ways.
+To give the rating prediction process some data to work with, one of the
+following mutually\-exclusive options must be present:
+.TP
+.B \-\-ratings\-file \f[I]FILE\f[]
+Read ratings from the delimited text file \f[I]FILE\f[].
+.RS
+.RE
+.TP
+.B \-\-csv\-file \f[I]FILE\f[]
+Read ratings from the CSV file \f[I]FILE\f[].
+This is identical to passing \f[C]\-\-ratings\-file=FILE\f[] with
+\f[C]\-\-delimiter=,\f[].
+.RS
+.RE
+.TP
+.B \-\-tsv\-file \f[I]FILE\f[]
+Read ratings from the tab\-separated file \f[I]FILE\f[].
+This is identical to passing \f[C]\-\-ratings\-file=FILE\f[] with
+\f[C]\-\-delimiter=^I\f[], but doesn\[aq]t require you to know how to
+encode tab characters in your shell.
+.RS
+.RE
+.TP
+.B \-\-pack\-file \f[I]FILE\f[]
+Read ratings from the packed rating file \f[I]FILE\f[].
+Packed files can be created with the \f[B]pack\-ratings\f[] command.
+.RS
+.RE
+.PP
+Additionally, the following options provide additional control over the
+data input:
+.TP
+.B \-d \f[I]DELIM\f[], \-\-delimiter \f[I]DELIM\f[]
+Use \f[I]DELIM\f[] as the delimiter for delimited text files.
+Only effective in conjunction with \f[C]\-\-ratings\-file\f[].
+.RS
+.RE
+.SS Script Environment Options
+.PP
+This command takes the standard LensKit script environment options for
+controlling how configuration scripts are interpreted:
+.TP
+.B \-C \f[I]URL\f[], \-\-classpath \f[I]URL\f[]
+Add \f[I]URL\f[] (which can be a path to a local directory or JAR file)
+to the classpath for loading the configuration scripts.
+This URL can contain additional components for the recommenders.
+This option can be specified multiple times to add multiple locations to
+the classpath.
+.RS
+.RE
+.TP
+.B \-D \f[I]PROP\f[]=\f[I]VALUE\f[], \-\-define
+\f[I]PROP\f[]=\f[I]VALUE\f[]
+Define the property \f[I]PROP\f[] to equal \f[I]VALUE\f[].
+This option is currently ignored for this command.
+To set Java system properties, use the \f[C]JAVA_OPTS\f[] environment
+variable (see \f[B]lenskit\f[](1)).
+.RS
+.RE
+.SH SEE ALSO
+.PP
+\f[B]lenskit\f[](1)
+.SH PROJECT INFORMATION
+.PP
+This command is a part of LensKit, an open source recommender systems
+toolkit developed by GroupLens Research (http://grouplens.org).
+Copyright 2010\-2014 Regents of the University of Minnesota and
+contributors.
+.PP
+Work on LensKit has been funded by the National Science Foundation under
+grants IIS 05\-34939, 08\-08692, 08\-12148, and 10\-17697.
+.PP
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation; either version 2.1 of the License, or (at
+your option) any later version.
+.PP
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+.PP
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110\-1301, USA.
