@@ -42,7 +42,7 @@ public class prediction_con_lenskit {
 		
 		PredittoreLenskit pred = new PredittoreLenskit(new File("src/Dati/train.csv"), new String("src/Dati/test.arff"));
 		
-		pred.svd_option();
+		pred.default_option();
 		
 		List<Set<Long>> candidates = new ArrayList<Set<Long>>();
 		

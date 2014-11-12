@@ -17,8 +17,11 @@ import org.grouplens.lenskit.core.LenskitConfiguration;
 import org.grouplens.lenskit.core.LenskitRecommender;
 import org.grouplens.lenskit.data.dao.EventDAO;
 import org.grouplens.lenskit.data.dao.SimpleFileRatingDAO;
+import org.grouplens.lenskit.iterative.IterationCount;
 import org.grouplens.lenskit.knn.NeighborhoodSize;
 import org.grouplens.lenskit.knn.item.ItemItemScorer;
+import org.grouplens.lenskit.mf.funksvd.FeatureCount;
+import org.grouplens.lenskit.mf.funksvd.FunkSVDItemScorer;
 import org.grouplens.lenskit.scored.ScoredId;
 import org.grouplens.lenskit.transform.normalize.BaselineSubtractingUserVectorNormalizer;
 import org.grouplens.lenskit.transform.normalize.UserVectorNormalizer;
@@ -73,6 +76,24 @@ public class PredittoreLenskit {
               .to(BaselineSubtractingUserVectorNormalizer.class);
         
         Recommender rec = null;
+        try {
+            rec = LenskitRecommender.build(config);
+        } catch (RecommenderBuildException e) {
+            throw new RuntimeException("recommender build failed", e);
+        }
+        
+        irec = rec.getItemRecommender();
+        assert irec != null;
+    }
+
+    public void svd_option(){
+    	config.bind(ItemScorer.class).to(FunkSVDItemScorer.class);
+    	config.bind(BaselineScorer.class, ItemScorer.class).to(UserMeanItemScorer.class);
+    	config.bind(UserMeanBaseline.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
+    	config.set(FeatureCount.class).to(25);
+    	config.set(IterationCount.class).to(125);
+    	
+    	Recommender rec = null;
         try {
             rec = LenskitRecommender.build(config);
         } catch (RecommenderBuildException e) {
