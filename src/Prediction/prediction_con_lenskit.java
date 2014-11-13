@@ -16,7 +16,7 @@ public class prediction_con_lenskit {
 	public static void main(String[] args) throws Exception {
 		int split = 2;
 		int numRec = 5;
-		int numCandidates = 7; 
+		int numCandidates = 15; 
 		String user_path = new String("src/Dati/test_user.arff");
 		String training = new String("src/Dati/super-joinsenzaGenere2.arff");
 		String sample_path = new String("src/Dati/Submission/sampleSubmission.arff");
@@ -42,7 +42,7 @@ public class prediction_con_lenskit {
 		
 		PredittoreLenskit pred = new PredittoreLenskit(new File("src/Dati/train.csv"), new String("src/Dati/test.arff"));
 		
-		pred.default_option();
+		pred.svd_option();
 		
 		List<Set<Long>> candidates = new ArrayList<Set<Long>>();
 		
@@ -56,6 +56,7 @@ public class prediction_con_lenskit {
 		
 		for(int i = 0; i < user_data.numInstances(); i++){
 			Set<Long> exclude = new HashSet();
+			exclude.add((long)1009);
 			int[] res = new int[numRec];
 			if(user_data.instance(i).stringValue(1).equalsIgnoreCase("M")){
 				for(long film_id: candidates.get(Genere.M.value)){

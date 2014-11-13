@@ -11,8 +11,8 @@ import weka.core.Instances;
 public class main {
 
 	public static void main(String[] args) throws Exception {
-		int topN = 30;
-		String training = new String("src/Dati/super-joinsenzaGenere2.arff");
+		int topN = 25;
+		String training = new String("src/Dati/Test/train.arff");
 		Instances data = Roba_utile.load(training);
 		
 		Instances[] split = Most_popular.genere_split(data);

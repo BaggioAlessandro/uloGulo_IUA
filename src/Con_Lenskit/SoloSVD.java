@@ -6,6 +6,7 @@ import org.grouplens.lenskit.Recommender;
 import org.grouplens.lenskit.RecommenderBuildException;
 import org.grouplens.lenskit.baseline.BaselineScorer;
 import org.grouplens.lenskit.baseline.ItemMeanRatingItemScorer;
+import org.grouplens.lenskit.baseline.MeanDamping;
 import org.grouplens.lenskit.baseline.UserMeanBaseline;
 import org.grouplens.lenskit.baseline.UserMeanItemScorer;
 import org.grouplens.lenskit.core.LenskitConfiguration;
@@ -13,6 +14,7 @@ import org.grouplens.lenskit.core.LenskitRecommender;
 import org.grouplens.lenskit.data.dao.EventDAO;
 import org.grouplens.lenskit.data.dao.SimpleFileRatingDAO;
 import org.grouplens.lenskit.iterative.IterationCount;
+import org.grouplens.lenskit.iterative.RegularizationTerm;
 import org.grouplens.lenskit.knn.NeighborhoodSize;
 import org.grouplens.lenskit.knn.item.ItemItemScorer;
 import org.grouplens.lenskit.mf.funksvd.FeatureCount;
@@ -79,10 +81,11 @@ public class SoloSVD implements Runnable {
         config.addComponent(dao);
         
         config.bind(ItemScorer.class).to(FunkSVDItemScorer.class);
-    	config.bind(BaselineScorer.class, ItemScorer.class).to(UserMeanItemScorer.class);
-    	config.bind(UserMeanBaseline.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
-    	config.set(FeatureCount.class).to(150);
-    	config.set(IterationCount.class).to(250);
+        config.bind(BaselineScorer.class, ItemScorer.class).to(UserMeanItemScorer.class);
+        config.bind(UserMeanBaseline.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
+        config.set(MeanDamping.class).to(5.0d);
+        config.set(FeatureCount.class).to(30);
+        config.set(IterationCount.class).to(150);
     	
     	Recommender rec = null;
         try {

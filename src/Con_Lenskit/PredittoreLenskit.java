@@ -18,6 +18,7 @@ import org.grouplens.lenskit.core.LenskitRecommender;
 import org.grouplens.lenskit.data.dao.EventDAO;
 import org.grouplens.lenskit.data.dao.SimpleFileRatingDAO;
 import org.grouplens.lenskit.iterative.IterationCount;
+import org.grouplens.lenskit.iterative.RegularizationTerm;
 import org.grouplens.lenskit.knn.NeighborhoodSize;
 import org.grouplens.lenskit.knn.item.ItemItemScorer;
 import org.grouplens.lenskit.mf.funksvd.FeatureCount;
@@ -89,9 +90,10 @@ public class PredittoreLenskit {
     public void svd_option(){
     	config.bind(ItemScorer.class).to(FunkSVDItemScorer.class);
     	config.bind(BaselineScorer.class, ItemScorer.class).to(UserMeanItemScorer.class);
-    	config.bind(UserMeanBaseline.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
+    	
     	config.set(FeatureCount.class).to(25);
-    	config.set(IterationCount.class).to(125);
+    	config.set(IterationCount.class).to(100);
+    	config.set(RegularizationTerm.class).to(0.015);
     	
     	Recommender rec = null;
         try {
