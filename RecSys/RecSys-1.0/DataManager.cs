@@ -78,7 +78,10 @@ namespace RecSys_1._0
                 {
                     int col = Int32.Parse(subitem.Key)-1;
                     if (row == col)
+                    {
                         simMat[row, col] = 1.0f;
+                        break;
+                    }
                     else
                     {
                         simMat[row, col] = pSimilarityI1I2(item.Key, subitem.Key);

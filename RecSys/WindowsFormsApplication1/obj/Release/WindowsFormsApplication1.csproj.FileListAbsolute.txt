@@ -1,0 +1,9 @@
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe.config
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.pdb
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Form1.resources
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
+C:\Users\Vhil\Desktop\AUICremonesi\uloGulo_IUA\RecSys\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
