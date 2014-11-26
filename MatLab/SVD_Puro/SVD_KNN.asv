@@ -1,0 +1,10 @@
+function [model] = SVD_KNN(train_matrix, k, ge_model, kk)
+
+NRM = ge_model.global_avg + (ge_model.user_bias * ge_model.item_bias);
+tm = full(train_matrix);
+NRM(tm>0)=0;
+[U, S, V] = svd(tm+NRM);
+A = U(:,1:kk) * sqrtm(S(1:kk,1:kk));
+B = sqrtm(S(1:kk,1:kk)) * V(:,1:kk)';
+
+model = A*B
