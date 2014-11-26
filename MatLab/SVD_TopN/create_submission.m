@@ -13,7 +13,7 @@ R_no_test = R(setdiff(1:nUsers, testUsers), :);
 expectedRelevant = keep_relevant(validationMat, 4);
 
 %build the model
-geModel = SVD_KNN(trainMat, 520);
+[geModel, geModelItem] = SVD_KNN(trainMat, 200, 38);
 
 %compute scores for validation users
 validationProfiles = trainMat(validationUsers,:);
@@ -23,7 +23,7 @@ geScores = SVD_KNN_scorer(geModel(validationUsers,2:size(geModel,2)), trainMat, 
 [geRanking, maRanking] = build_ranking(geScores);
 
 %evaluate the RMSE over the predicted ratings
-rmse(validationMat, geScores)
+%rmse(validationMat, geScores)
 
 %evaluate the MAP@K over the validation set
 map_at_k(expectedRelevant, geRanking, 5)

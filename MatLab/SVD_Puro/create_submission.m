@@ -14,8 +14,8 @@ expectedRelevant = keep_relevant(validationMat, 4);
 
 %build the model
 params.shrinkage_items = 200;
-params.shrinkage_users = 10;
-%geModel = global_effects_model(trainMat, params);
+params.shrinkage_users = 20;
+geModel = global_effects_model(trainMat, params);
 svdModel = SVD_KNN(trainMat, 80, geModel, 10);
 
 %compute scores for validation users

@@ -1,0 +1,10 @@
+function [model] = SVD_KNN(train_matrix, k, kk)
+
+[U, S, V] = svds(train_matrix, kk);
+A = U * sqrtm(S);
+%B = sqrtm(S) * V';
+
+KNN = ExhaustiveSearcher(A,'Distance','cosine');
+KNNI = ExhaustiveSeatcher(
+
+[model, D] = knnsearch(KNN, KNN.X, 'K', k+1);
