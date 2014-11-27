@@ -7,11 +7,14 @@ import librerie_Aggiunte.Roba_utile;
 
 //this prediction require the top 10  popular film in src/Dati/preferitiv.2-" + i + ".arff
 public class age_based_prediction {
+	
+	public static String path = new String("src/Dati/Test/");
+	public static String output = new String("new_sample.arff");
 
 	public static void main(String[] args) throws Exception {
-		String user_path = new String("src/Dati/test_user.arff");
-		String training = new String("src/Dati/super-joinsenzaGenere2.arff");
-		String sample_path = new String("src/Dati/Submission/sampleSubmission.arff");
+		String user_path = new String(path+"test_user_data.arff");
+		String training = new String(path+"join-user-rating.arff");
+		String sample_path = new String(path+output);
 		
 		String[] popular = new String[6];
 		Instances[] popular_data = new Instances[6];
@@ -85,7 +88,7 @@ public class age_based_prediction {
 					break;
 			}
 			
-			
+			System.out.println(i);
 		}
 		Roba_utile.save(sample_data, sample_path);
 		System.out.println("fine");

@@ -19,7 +19,7 @@ public class CreateTesting {
 	public static void main(String[] args) throws Exception {
 		int numUser = 7000;
 		Instances data = Roba_utile.load("src/Dati/Test/train.arff");
-		Instances submission_sample = Roba_utile.load("src/Dati/Test/sampleSubmission.arff");
+		Instances submission_sample = Roba_utile.load("src/Dati/sampleSubmission.arff");
 		
 		FastVector fv = new FastVector(data.numAttributes());
 		for(int i = 0; i < data.numAttributes(); i++){

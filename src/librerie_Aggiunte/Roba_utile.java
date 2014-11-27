@@ -31,9 +31,11 @@ public class Roba_utile {
 	
 	public static boolean visto(int id_user, int id_film, Instances data){
 		for(int i = 0; i < data.numInstances(); i++){
-			if(data.instance(i).value(3) == id_user)
-				if(data.instance(i).value(1) == id_film)
+			if(data.instance(i).value(0) == id_user)
+				if(data.instance(i).value(4) == id_film){
+					System.out.println("visto");
 					return true;
+				}
 			
 		}
 		return false;

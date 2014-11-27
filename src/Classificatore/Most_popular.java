@@ -7,7 +7,8 @@ import weka.core.Instances;
 public class Most_popular {
 	
 	public static Frequency[] calc_frequency_relevant(Instances data) throws Exception{
-		
+		int att_rating = 5;	//cambiare
+		int att_movie_id = 4;	//cambiare
 		
 		//DataSource join = new DataSource("/src/Dati/super-joinsenzaGenere.arff");
 		
@@ -22,8 +23,8 @@ public class Most_popular {
 		
 		//calcolo occorrenze sopra il 4
 		for(int i = 0; i < data.numInstances(); i++){
-			if(data.instance(i).value(4) >= 4){
-				table[ (int) data.instance(i).value(0)-1].add_occ();
+			if(data.instance(i).value(att_rating) >= 4){
+				table[ (int) data.instance(i).value(att_movie_id)-1].add_occ();
 				
 			}
 		}
@@ -38,7 +39,8 @@ public class Most_popular {
 	}
 	
 	public static Frequency[] calc_frequency(Instances data) throws Exception{
-		
+		int att_rating = 5;	//cambiare	5 	-	4
+		int att_movie_id = 4;	//cambiare 4	- 0
 		
 		//DataSource join = new DataSource("/src/Dati/super-joinsenzaGenere.arff");
 		
@@ -53,7 +55,7 @@ public class Most_popular {
 		
 		//calcolo occorrenze
 		for(int i = 0; i < data.numInstances(); i++){
-			table[ (int) data.instance(i).value(0)-1].add_occ();
+			table[ (int) data.instance(i).value(att_movie_id)-1].add_occ();
 		}
 		
 		Arrays.sort(table);
@@ -67,7 +69,7 @@ public class Most_popular {
 
 	public static Instances[] genere_split(Instances data) throws Exception{
 		int splits = 2;
-		int att_genere = 5;
+		int att_genere = 1;
 		
 		//data structure
 		FastVector fv = new FastVector(data.numAttributes());
@@ -98,7 +100,7 @@ public class Most_popular {
 		
 	public static Instances[] age_split(Instances data) throws Exception{
 		int splits = 6;
-		int attr_age = 6;
+		int attr_age = 2;
 		
 		//data structure
 		FastVector fv = new FastVector(data.numAttributes());

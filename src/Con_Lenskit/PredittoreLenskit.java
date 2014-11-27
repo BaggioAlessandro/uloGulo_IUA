@@ -1,6 +1,7 @@
 package Con_Lenskit;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,7 @@ import org.grouplens.lenskit.Recommender;
 import org.grouplens.lenskit.RecommenderBuildException;
 import org.grouplens.lenskit.baseline.BaselineScorer;
 import org.grouplens.lenskit.baseline.ItemMeanRatingItemScorer;
+import org.grouplens.lenskit.baseline.MeanDamping;
 import org.grouplens.lenskit.baseline.UserMeanBaseline;
 import org.grouplens.lenskit.baseline.UserMeanItemScorer;
 import org.grouplens.lenskit.core.LenskitConfiguration;
@@ -88,12 +90,23 @@ public class PredittoreLenskit {
     }
 
     public void svd_option(){
-    	config.bind(ItemScorer.class).to(FunkSVDItemScorer.class);
-    	config.bind(BaselineScorer.class, ItemScorer.class).to(UserMeanItemScorer.class);
     	
-    	config.set(FeatureCount.class).to(25);
-    	config.set(IterationCount.class).to(100);
-    	config.set(RegularizationTerm.class).to(0.015);
+    	/*
+    	config.within(UserVectorNormalizer.class);
+    	{
+	         config.bind(BaselineScorer.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
+	         config.set((Class<? extends Annotation>) MeanDamping.class).to(5.0);
+	    }
+    	*/
+    	
+    	config.bind(ItemScorer.class).to(FunkSVDItemScorer.class);
+        
+        config.bind(BaselineScorer.class, ItemScorer.class).to(UserMeanItemScorer.class);
+        config.bind(UserMeanBaseline.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
+        config.set(MeanDamping.class).to(50.0d);
+        config.set(FeatureCount.class).to(50);
+        config.set(IterationCount.class).to(150);
+        config.set(RegularizationTerm.class).to(0.001);
     	
     	Recommender rec = null;
         try {

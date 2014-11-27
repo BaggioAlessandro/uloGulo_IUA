@@ -6,6 +6,7 @@ import org.grouplens.lenskit.Recommender;
 import org.grouplens.lenskit.RecommenderBuildException;
 import org.grouplens.lenskit.baseline.BaselineScorer;
 import org.grouplens.lenskit.baseline.ItemMeanRatingItemScorer;
+import org.grouplens.lenskit.baseline.LeastSquaresItemScorer;
 import org.grouplens.lenskit.baseline.MeanDamping;
 import org.grouplens.lenskit.baseline.UserMeanBaseline;
 import org.grouplens.lenskit.baseline.UserMeanItemScorer;
@@ -56,7 +57,7 @@ public class SoloSVD implements Runnable {
     }
 
     private String delimiter = ",";
-    private File inputFile = new File("src/Dati/train.csv");
+    private File inputFile = new File("src/Dati/train_NH.csv");
     private List<Long> users;
     private String test_path = new String("src/Dati/test.arff");
     private String output_path = new String("src/Dati/sub.csv");
@@ -81,12 +82,17 @@ public class SoloSVD implements Runnable {
         config.addComponent(dao);
         
         config.bind(ItemScorer.class).to(FunkSVDItemScorer.class);
+        
         config.bind(BaselineScorer.class, ItemScorer.class).to(UserMeanItemScorer.class);
         config.bind(UserMeanBaseline.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
-        config.set(MeanDamping.class).to(5.0d);
-        config.set(FeatureCount.class).to(30);
+        config.set(MeanDamping.class).to(50.0d);
+        config.set(FeatureCount.class).to(50);
         config.set(IterationCount.class).to(150);
-    	
+        config.set(RegularizationTerm.class).to(0.001);
+        
+        config.within(UserVectorNormalizer.class).bind(BaselineScorer.class, ItemScorer.class).to(ItemMeanRatingItemScorer.class);
+        config.within(UserVectorNormalizer.class).set(MeanDamping.class).to(5.0d);
+        
     	Recommender rec = null;
         try {
             rec = LenskitRecommender.build(config);

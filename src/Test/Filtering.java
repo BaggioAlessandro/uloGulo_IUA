@@ -31,7 +31,8 @@ public class Filtering {
 				i++;
 		}
 		
-		Roba_utile.save(data, "src/Dati/Test/train_all.arff");
+		Roba_utile.save(data, "src/Dati/Test/train.arff");
+		System.out.println("Fine");
 	}
 
 }

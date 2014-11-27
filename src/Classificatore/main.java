@@ -9,17 +9,28 @@ import librerie_Aggiunte.Roba_utile;
 import weka.core.Instances;
 
 public class main {
-
+	public static String path = new String("src/Dati/Test/");
+	
 	public static void main(String[] args) throws Exception {
 		int topN = 25;
-		String training = new String("src/Dati/Test/train.arff");
+		String training = new String(path+"join-user-rating.arff");
 		Instances data = Roba_utile.load(training);
-		
-		Instances[] split = Most_popular.genere_split(data);
-		ArrayList<Frequency[]> popular = new ArrayList<Frequency[]>();
-		
+
+		Instances[] split = Most_popular.age_split(data);
+		Instances[] split2 = new Instances[split.length * 2];
 		for(int i = 0; i < split.length; i++){
-			popular.add(Most_popular.calc_frequency_relevant(split[i]));
+			//make the second split for each category
+			Instances[] temp = Most_popular.genere_split(split[i]);
+		
+			//copy in split2
+			for(int j = 0; j < temp.length; j++){
+				split2[i*2+j] = temp[j];
+			}
+		}
+		ArrayList<Frequency[]> popular = new ArrayList<Frequency[]>();
+	
+		for(int i = 0; i < split2.length; i++){
+			popular.add(Most_popular.calc_frequency(split2[i]));
 		}
 		
 		write(popular, topN);
@@ -42,24 +53,5 @@ public class main {
 		    writer.close();
 		}
 	}
-	
-	/*
-	Instances[] split = Most_popular.age_split(data);
-	Instances[] split2 = new Instances[split.length * 2];
-	for(int i = 0; i < split.length; i++){
-		//make the second split for each category
-		Instances[] temp = Most_popular.genere_split(split[i]);
-		
-		//copy in split2
-		for(int j = 0; j < temp.length; j++){
-			split2[i*2+j] = temp[j];
-		}
-	}
-	ArrayList<Frequency[]> popular = new ArrayList<Frequency[]>();
-	
-	for(int i = 0; i < split2.length; i++){
-		popular.add(Most_popular.calc_frequency(split2[i]));
-	}
-	*/
 
 }

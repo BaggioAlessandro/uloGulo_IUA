@@ -6,10 +6,14 @@ import weka.core.Instances;
 
 public class Age_Genere_based {
 
+	public static String path = new String("src/Dati/");
+	public static String output = new String("sampleSubmission.arff");
+	
+	
 	public static void main(String[] args) throws Exception {
-		String user_path = new String("src/Dati/test_user.arff");
-		String training = new String("src/Dati/super-joinsenzaGenere2.arff");
-		String sample_path = new String("src/Dati/Submission/sampleSubmission.arff");
+		String user_path = new String(path+"test_user_data.arff");
+		String training = new String(path+"join-user-rating.arff");
+		String sample_path = new String(path+output);
 		
 		String[] popular = new String[12];
 		Instances[] popular_data = new Instances[12];
@@ -28,14 +32,14 @@ public class Age_Genere_based {
 				case 18:
 					if(user_data.instance(i).stringValue(1).equalsIgnoreCase("F")){
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0 + Genere.F.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[0 + Genere.F.value].instance(j).value(0));
 								k++;
 							}
 						}
 					}else{
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0 + Genere.M.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[0 + Genere.M.value].instance(j).value(0));
 								k++;
 							}
@@ -45,14 +49,14 @@ public class Age_Genere_based {
 				case 25:
 					if(user_data.instance(i).stringValue(1).equalsIgnoreCase("F")){
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[2 + Genere.F.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[2 + Genere.F.value].instance(j).value(0));
 								k++;
 							}
 						}
 					}else{
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[2 + Genere.M.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[2 + Genere.M.value].instance(j).value(0));
 								k++;
 							}
@@ -62,14 +66,14 @@ public class Age_Genere_based {
 				case 35:
 					if(user_data.instance(i).stringValue(1).equalsIgnoreCase("F")){
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[4 + Genere.F.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[4 + Genere.F.value].instance(j).value(0));
 								k++;
 							}
 						}
 					}else{
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[4 + Genere.M.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[4 + Genere.M.value].instance(j).value(0));
 								k++;
 							}
@@ -79,14 +83,14 @@ public class Age_Genere_based {
 				case 45:
 					if(user_data.instance(i).stringValue(1).equalsIgnoreCase("F")){
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[6 + Genere.F.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[6 + Genere.F.value].instance(j).value(0));
 								k++;
 							}
 						}
 					}else{
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[6 + Genere.M.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[6 + Genere.M.value].instance(j).value(0));
 								k++;
 							}
@@ -96,14 +100,14 @@ public class Age_Genere_based {
 				case 50:
 					if(user_data.instance(i).stringValue(1).equalsIgnoreCase("F")){
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[8 + Genere.F.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[8 + Genere.F.value].instance(j).value(0));
 								k++;
 							}
 						}
 					}else{
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[8 + Genere.M.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[8 + Genere.M.value].instance(j).value(0));
 								k++;
 							}
@@ -113,14 +117,14 @@ public class Age_Genere_based {
 				case 56:
 					if(user_data.instance(i).stringValue(1).equalsIgnoreCase("F")){
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[10 + Genere.F.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[10 + Genere.F.value].instance(j).value(0));
 								k++;
 							}
 						}
 					}else{
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[10 + Genere.M.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[10 + Genere.M.value].instance(j).value(0));
 								k++;
 							}
@@ -132,14 +136,14 @@ public class Age_Genere_based {
 				default:
 					if(user_data.instance(i).stringValue(1).equalsIgnoreCase("F")){
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[4 + Genere.F.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[4 + Genere.F.value].instance(j).value(0));
 								k++;
 							}
 						}
 					}else{
 						for(int k = 0, j = 0; k < 5; j++){
-							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[0].instance(j).value(0), data)){
+							if(!Roba_utile.visto((int)user_data.instance(i).value(0), (int)popular_data[4 + Genere.M.value].instance(j).value(0), data)){
 								sample_data.instance(i).setValue(k+1, popular_data[4 + Genere.M.value].instance(j).value(0));
 								k++;
 							}
@@ -148,6 +152,7 @@ public class Age_Genere_based {
 					break;
 			}
 			
+			System.out.println(i);
 			
 		}
 		Roba_utile.save(sample_data, sample_path);
