@@ -1,3 +1,0 @@
-Questo risultato è stato ottenuto partizionando il dataset
-sulla base del GENERE e poi individuando per ogni categoria i 10 
-film + popolari

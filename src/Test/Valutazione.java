@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 
+import junit.framework.Test;
 import PreProcessing.Parser_submission;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
@@ -14,13 +16,13 @@ import librerie_Aggiunte.Roba_utile;
 
 public class Valutazione {
 
-	static String submission_path = new String("C:/Users/Ale/Documents/GitHub/uloGulo_IUA/DataMisc/Test/Test_data/res.csv");
-	static String output = new String("C:/Users/Ale/Documents/GitHub/uloGulo_IUA/DataMisc/Test/Test_data/Temp/temp.arff");
+	static String submission_path = new String("DataMisc/Test/Test_data/res.csv");
+	static String output = new String("DataMisc/Test/Test_data/Temp/temp.arff");
 	
 	public static void main(String[] args) throws Exception {
 		parser_submission();
 		
-		Instances rating_test = Roba_utile.load("C:/Users/Ale/Documents/GitHub/uloGulo_IUA/DataMisc/Test/Test_data/relevant_test.arff");
+		Instances rating_test = Roba_utile.load("DataMisc/Test/Test_data/relevant_test.arff");
 		
 		Instances submission = Roba_utile.load(output);
 		

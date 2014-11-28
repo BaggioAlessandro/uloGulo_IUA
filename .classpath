@@ -42,5 +42,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/lenskit-2.1/lib/vectorz-0.36.0.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/lenskit-2.1/lib/xz-1.5.jar"/>
 	<classpathentry kind="lib" path="src/librerie_Aggiunte/opencsv-3.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
