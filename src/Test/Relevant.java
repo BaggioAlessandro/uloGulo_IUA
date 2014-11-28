@@ -6,7 +6,7 @@ import weka.core.Instances;
 public class Relevant {
 
 	public static void main(String[] args) throws Exception {
-		Instances rating_test = Roba_utile.load("src/Dati/Test/True/rating_test.arff");
+		Instances rating_test = Roba_utile.load("C:/Users/Ale/Documents/GitHub/uloGulo_IUA/DataMisc/Test/Test_data/rating_test.arff");
 		
 		
 		for(int i = 0; i < rating_test.numInstances();){
@@ -16,7 +16,7 @@ public class Relevant {
 			else i++;
 		}
 		
-		Roba_utile.save(rating_test, "src/Dati/Test/True/relevant_test.arff");
+		Roba_utile.save(rating_test, "C:/Users/Ale/Documents/GitHub/uloGulo_IUA/DataMisc/Test/Test_data/relevant_test.arff");
 		
 		System.out.println("fine");
 		
