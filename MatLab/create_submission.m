@@ -1,5 +1,8 @@
+% Setup path
+addpath(genpath('./functions'));
+
 %load input data
-[R, testUsers] = load_data('train.csv', 'test.csv', 1);
+[R, testUsers] = load_data('../DataSet/train.csv', '../DataSet/test.csv', 1);
 [nUsers, nItems] = size(R);
 
 %temporarily remove test users from the training matrix
@@ -10,31 +13,22 @@ R_no_test = R(setdiff(1:nUsers, testUsers), :);
 [trainMat, validationMat, validationUsers] = hold_out_fast(R_no_test, 0.8, 5);
 
 %build the model
-geModelParams.shrinkage_items = 25;
-geModelParams.shrinkage_users = 10;
-geModel = global_effects_model(trainMat, geModelParams);
+[geModel, geModelItem] = SVD_KNN(trainMat, 200, 38);
 
 %compute scores for validation users
 validationProfiles = trainMat(validationUsers,:);
-
-geScorerParams.exclude_already_rated = 1;
-geScorerParams.min_rating = min(R(R>0));
-geScorerParams.max_rating = max(R(R>0));
-geScorerParams.clip_ratings = 1;
-geScores = global_effects_scorer(geModel, validationUsers, validationProfiles, geScorerParams);
-
-
-%evaluate the RMSE over the predicted ratings
-err = rmse_err(validationMat, geScores)
+geScores = SVD_KNN_scorer(geModel(validationUsers,2:size(geModel,2)), trainMat, validationProfiles, 1);
 
 %then compute rankings
-geRanking = build_ranking(geScores);
+[geRanking, maRanking] = build_ranking(geScores);
 
+%evaluate the RMSE over the predicted ratings
+%rmse(validationMat, geScores)
+
+params.k = 5;
+params.relevance_min_th = 4;
 %evaluate the MAP@K over the validation set
-map = map_at_k(validationMat, geRanking, 5, 4)
+map_at_k(validationMat, geRanking, params)
 
 %for you :-) : use above functions to generate rankings for the users in testUsers
-
-
-
 
