@@ -47,5 +47,5 @@ params.relevance_min_th = 4;
 %evaluate the MAP@K over the validation set
 map_at_k(validationMat, geRanking, params)
 
-%for you :-) : use above functions to generate rankings for the users in testUsers
-
+% write submission file
+write_submission(geRanking, testUsers);
