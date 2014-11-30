@@ -5,7 +5,7 @@ function [model] = global_effects_model(train_matrix, params)
 %params.shrinkage_users: shrinkage coefficient for users
 
 
-if exist('param','var') == 0
+if exist('params','var') == 0
 %default shrinkage values taken from "Factor in Neighbors: Scalable and Accurate
 %Collaborative Filtering", Y. Koren, 2010
 
@@ -45,8 +45,8 @@ model.user_bias = sum(train_matrix_unbiased,2)./(params.shrinkage_users + user_p
 
 %if you want to plot the biases, uncomment these lines (change plot with
 %hist if you want to output the histograms
-% figure;plot(model.item_bias);
-% figure;plot(model.user_bias);
+% figure;hist(model.item_bias);
+% figure;hist(model.user_bias);
 
 %if you to include the unbiased items in the model, uncomment the last row
 %subtract the user bias from the unbiased training matrix
