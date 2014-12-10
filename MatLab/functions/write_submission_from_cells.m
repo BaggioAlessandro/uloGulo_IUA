@@ -1,5 +1,5 @@
-function write_submission( rankingCells, testUsers )
-%write_submision Generates a csv file from the build_ranking output
+function write_submission_from_cells( rankingCells, testUsers )
+%write_submission_from_cells Generates a csv file from the build_ranking output
 %   Uses the code from nearfxx on the Forum
 %   Output the ranking to a file.
 mat =(cell2mat(rankingCells));

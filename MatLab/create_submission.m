@@ -48,4 +48,4 @@ params.relevance_min_th = 4;
 map_at_k(validationMat, geRanking, params)
 
 % write submission file
-write_submission(geRanking, testUsers);
+write_submission_from_cells(geRanking, testUsers);
