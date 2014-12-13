@@ -18,14 +18,20 @@ public class Valutazione {
 
 	static String submission_path = new String("DataMisc/Test/Test_data/res.csv");
 	static String output = new String("DataMisc/Test/Test_data/Temp/temp.arff");
-	
+	static boolean is_arff = false;
 	public static void main(String[] args) throws Exception {
-		parser_submission();
-		
+		Instances submission;
+		if(!is_arff){
+			parser_submission();
+			submission = Roba_utile.load(output);
+		}else{
+			submission = Roba_utile.load(submission_path);
+		}
 		Instances rating_test = Roba_utile.load("DataMisc/Test/Test_data/relevant_test.arff");
-		
-		Instances submission = Roba_utile.load(output);
-		
+				
+		int[] stat = new int[5];
+		int[] missing_rec = new int[5];
+		int[] n_rec = new int[5];
 		float media = 0;
 		int count_non_relevant = 0;
 		for(int i = 0; i < submission.numInstances(); i++){
@@ -37,25 +43,48 @@ public class Valutazione {
 				ok[j] = 0;
 			}
 			
-			int nRelevant = 0;
+			//calculete how many rec are missing
+			if(submission.instance(i).value(1) == 4000){
+				missing_rec[0]++;
+			}
+			if(submission.instance(i).value(2) == 4000){
+				missing_rec[1]++;					
+			}
+			if(submission.instance(i).value(3) == 4000){
+				missing_rec[2]++;
+			}
+			if(submission.instance(i).value(4) == 4000){
+				missing_rec[3]++;
+			}
+			if(submission.instance(i).value(5) == 4000){
+				missing_rec[4]++;
+			}
 			
+			//calculate correct reccomendation and save statistics
+			int nRelevant = 0;
 			for(int j = 0; j < rating_test.numInstances(); j++){
 				if(rating_test.instance(j).value(0) == submission.instance(i).value(0)){
+					
 					if(rating_test.instance(j).value(1) == submission.instance(i).value(1)){
 						count++;
 						ok[0] = 1;
+						stat[0] ++;
 					}else if(rating_test.instance(j).value(1) == submission.instance(i).value(2)){
 						count++;
 						ok[1] = 1;
+						stat[1] ++;
 					}else if(rating_test.instance(j).value(1) == submission.instance(i).value(3)){
 						count++;
 						ok[2] = 1;
+						stat[2] ++;
 					}else if(rating_test.instance(j).value(1) == submission.instance(i).value(4)){
 						count++;
 						ok[3] = 1;
+						stat[3] ++;
 					}else if(rating_test.instance(j).value(1) == submission.instance(i).value(5)){
 						count++;
 						ok[4] = 1;
+						stat[4] ++;
 					}
 				
 					nRelevant++;
@@ -70,7 +99,7 @@ public class Valutazione {
 				}
 			}
 			if(nRelevant!=0){
-				media += tot/nRelevant;
+				media += tot/5;
 			}else
 				count_non_relevant++;
 		}
@@ -79,6 +108,18 @@ public class Valutazione {
 		System.out.println(media);
 		System.out.println("utenti senza relevant item sono: "+count_non_relevant );
 		
+		System.out.println("numero di rec effettuate");
+		for(int i = 0; i < 5; i++){
+			n_rec[i] = submission.numInstances() - missing_rec[i];
+			System.out.println(n_rec[i]);
+		}
+		
+		System.out.println("numero di item correttamente raccomandati");
+		for(int i = 0; i < 5; i++){
+			System.out.println(stat[i]*1.0 / n_rec[i]*1.0);
+		}
+		
+		System.out.println("numero totale di test user e': " + submission.numInstances());
 	}
 	
 	private static void parser_submission() throws IOException{
