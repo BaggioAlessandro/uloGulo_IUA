@@ -10,8 +10,8 @@ import au.com.bytecode.opencsv.CSVWriter;
 public class Parser_submission {
 
 	public static void main(String[] args) throws IOException {
-		String input = "src/Dati/sampleSubmission.csv";
-		String output = "src/Dati/S_TOP_P_BY_GEN-AGE.csv";
+		String input = "DataMisc/Test/Test_data/res.csv";
+		String output = "DataMisc/Test/Test_data/res2.csv";
 		
 		
 		CSVReader reader = new CSVReader(new FileReader(input ));

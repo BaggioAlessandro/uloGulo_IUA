@@ -14,6 +14,7 @@ import org.grouplens.lenskit.data.dao.EventDAO;
 import org.grouplens.lenskit.data.dao.SimpleFileRatingDAO;
 import org.grouplens.lenskit.knn.NeighborhoodSize;
 import org.grouplens.lenskit.knn.item.ItemItemScorer;
+import org.grouplens.lenskit.mf.svd.BiasedMFItemScorer;
 import org.grouplens.lenskit.scored.ScoredId;
 import org.grouplens.lenskit.transform.normalize.BaselineSubtractingUserVectorNormalizer;
 import org.grouplens.lenskit.transform.normalize.UserVectorNormalizer;
@@ -51,10 +52,10 @@ public class HelloLenskit implements Runnable {
     }
 
     private String delimiter = ",";
-    private File inputFile = new File("src/Dati/train.csv");
+    private File inputFile = new File("DataMisc/train_NH.csv");
     private List<Long> users;
-    private String test_path = new String("src/Dati/test.arff");
-    private String output_path = new String("src/Dati/sub.csv");
+    private String test_path = new String("DataMisc/test.arff");
+    private String output_path = new String("DataMisc/res.csv");
 
     public HelloLenskit(String[] args) throws Exception {
     	Instances test_set = Roba_utile.load(test_path);
@@ -77,14 +78,14 @@ public class HelloLenskit implements Runnable {
         // ... and configure the item scorer.  The bind and set methods
         // are what you use to do that. Here, we want an item-item scorer.
         config.bind(ItemScorer.class)
-              .to(ItemItemScorer.class);
+              .to(BiasedMFItemScorer.class);
 
         config.bind(VectorSimilarity.class)
                 .to(PearsonCorrelation.class);
 
         config.set(NeighborhoodSize.class).to(20);
 
-        config.set(SimilarityDamping.class).to(7);   //shrinkage factor
+        config.set(SimilarityDamping.class).to(10);   //shrinkage factor
         
         // let's use personalized mean rating as the baseline/fallback predictor.
         // 2-step process:
