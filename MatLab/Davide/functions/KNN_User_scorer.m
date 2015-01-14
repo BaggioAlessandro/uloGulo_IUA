@@ -10,8 +10,9 @@ scores = zeros(size(profiles));
 
 for ii= 1:n_users
     nn = rating_mat(nn_model(ii,:),:);
+    %nn(nn>0) = 1;
     for jj=1:k
-        nn(jj, :) = nn(jj,:) * nn_model_d(ii,jj);
+        nn(jj, :) = nn(jj,:) * (1 - nn_model_d(ii,jj)).^2;
     end
     scores(ii,:) = sum(nn);
 end

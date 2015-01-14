@@ -15,5 +15,5 @@ nnScores = KNN_User_scorer(nnModel(:,2:(K+1)), nnModelDistance(:,2:(K+1)), R, te
 %then compute rankings
 [nnRanking, maRanking] = build_ranking(nnScores);
 
-write_submission_from_cells(nnRanking, testUsers, 'results.csv');
-csvwrite('rec.csv', maRanking);
+write_submission_from_cells(nnRanking, testUsers, 'res.csv');
+%csvwrite('rec.csv', maRanking);

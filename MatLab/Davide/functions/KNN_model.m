@@ -7,7 +7,7 @@ function [NN, NND] = KNN_model(rating_matrix, k, val_users)
 %-----------------------------------------
 
 %Creo l'oggetto per il cacolo della distanza. spearman sembra dare risultati migliori di cosine
-KNN = ExhaustiveSearcher(rating_matrix,'Distance','spearman');
+KNN = ExhaustiveSearcher(rating_matrix,'Distance','cosine');
 
 [NN, NND] = knnsearch(KNN, KNN.X(val_users, :), 'K', k+1);
 
