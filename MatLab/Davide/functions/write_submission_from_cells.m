@@ -1,9 +1,9 @@
-function write_submission_from_cells( rankingCells, testUsers, name )
+function write_submission_from_cells( rankingCells, testUsers )
 %write_submission_from_cells Generates a csv file from the build_ranking output
 %   Uses the code from nearfxx on the Forum
 %   Output the ranking to a file.
 mat =(cell2mat(rankingCells));
-fid=fopen(name,'wt');
+fid=fopen('submission.csv','wt');
 [rows,~]=size(mat);
 fprintf(fid,'UserId,RecommendedMovieIds\n');
 for i=1:rows

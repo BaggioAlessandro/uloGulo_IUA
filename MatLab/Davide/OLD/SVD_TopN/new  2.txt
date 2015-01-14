@@ -1,0 +1,57 @@
+synchronized(O){
+	O.wait()
+	}
+	
+	//Devo avere la Lock su O per chiamare la wait di O, quindi devo essere in un blocco syncronized
+	//O.wait() equivale a pthread_wait(o.mutex, o.conditionVariable);
+	
+	pthread_mutex_t bufferM;
+	pthread_cond_t prodCV, consCV;
+	
+	void* produced(void* id){
+	int data;
+	while(1){
+		if(buffer>=0) pthread_cond_wait(&prodCS, &bufferM);
+		buffer = data;
+		pthread_cond_signal(&consCV);
+		pthread_mutex_unlock(&bufferM);
+	}
+	}
+	
+	void* consumer(void* id){
+	while(1){
+		if(buffer<0) pthread_cond_wait(&consCV, &bufferM);
+		data = buffer;
+		buffer = -1;
+		pthread_cond_signal(&prodCV);
+		pthread_mutex_unlock(&bufferM);
+	}
+	}
+	
+	//Java
+	
+	public class PrdConsBuffer{
+		private int data;
+		public ProdConsBuffer(){
+			data = -1;
+		}
+		
+		public syncronized void produce(int data){
+			while(data>=0){//uso while perchè uso notifyAll e potrei risvegliarmi per niente
+				wait()
+			}
+			this.data = data;
+			notifyAll();//Uso notifyAll perchè non ho 2 condition variable ma una sola, quella della classe
+		}
+		
+		public syncronized int consume(){
+			int d;
+			while(data<0){
+				wait()
+			}
+			d=data;
+			data=-1;
+			notifyAll();
+			return d;
+		}
+	}
