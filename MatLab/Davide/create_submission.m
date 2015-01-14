@@ -10,7 +10,7 @@ K = 200;
 %compute scores for validation users
 testProfiles = R(testUsers,:);
 %nnModel(:,2:(K+1)) prendo la matrice partendo dalla 2° colonna perchè la prima è l'elemento stesso
-nnScores = KNN_User_scorer(nnModel(:,2:(K+1)), R, testProfiles, 1, K);
+nnScores = KNN_User_scorer(nnModel(:,2:(K+1)), nnModelDistance(:,2:(K+1)), R, testProfiles, 1, K);
 
 %then compute rankings
 [nnRanking, maRanking] = build_ranking(nnScores);

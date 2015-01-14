@@ -15,11 +15,11 @@ expectedRelevant = keep_relevant(validationMat, 4);
 
 %build the model
 K = 200;
-[nnModel, nnModelDistance] = KNN_model(R, K, validationUsers);
+[nnModel, nnModelDistance] = KNN_model(trainMat, K, validationUsers);
 
 %compute scores for validation users
 validationProfiles = trainMat(validationUsers,:);
-nnScores = KNN_User_scorer(nnModel(:,2:(K+1)), trainMat, validationProfiles, 1, K);
+nnScores = KNN_User_scorer(nnModel(:,2:(K+1)), nnModelDistance(:,2:(K+1)), trainMat, validationProfiles, 1, K);
 
 %then compute rankings
 [nnRanking, ~] = build_ranking(nnScores);
