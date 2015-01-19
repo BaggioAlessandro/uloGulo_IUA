@@ -6,7 +6,7 @@ average_precisions = zeros(n_probes, 1);
 if iscell(actual)
     actual_array = actual;
 else
-    actual_array = arrayfun( @(id) actual(actual(:,1)==id, [2 3 4 5 6]), actual(:,1), 'UniformOutput', 0 );
+    actual_array = submission_mat2cell(actual);
 end
 
 for pp=1:n_probes
