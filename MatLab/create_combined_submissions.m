@@ -8,7 +8,10 @@ ar_submission = load_submission('./submissions/thelast+ar.csv');
 %combination_order = [1 1 1 1 1 2 2 2 2 2];
 %combination_order = [1 2 1 2 1 2 1 2 1 2];
 %combination_order = [2 2 2 2 2 1 1 1 1 1];
+% Optimal found by trial and error
 combination_order = [2 1 1 2 2 2 2 1 1 1];
+% Optimal according script
+%combination_order = [2 1 2 1 2 1 2 1 2 1];
 
 combined_submission = combine_submissions(knn_submission, ar_submission, combination_order);
 
