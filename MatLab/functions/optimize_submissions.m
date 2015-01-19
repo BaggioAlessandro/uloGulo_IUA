@@ -1,42 +1,65 @@
 %% Setup
 % submission files that will be considered
+% label, path
 submission_files = {
-        './submissions/soft.csv'
-        './submissions/thelast+ar.csv'
+        'soft' './submissions/soft.csv'
+        'last+ar' './submissions/thelast+ar.csv'
+        'bestAR' './submissions/bestAR.csv'
+        'popular' './submissions/popular.csv'
     };
 
 %% Execution
 % Load correct recommendations
 expected = load_expected();
 % Load each submission file
-number_of_submissions = length(submission_files);
-submission = cell(size(submission_files));
+[number_of_submissions, ~] = size(submission_files);
+submission = cell(number_of_submissions,1);
 for i = 1:number_of_submissions
-    submission{i} = load_submission_as_cell(submission_files{i});
+    submission{i} = load_submission_as_cell(submission_files{i,2});
 end
 original_submission = submission;
 
-map = zeros(1,number_of_submissions);
-best_map = 0;
-best_submission = {};
 [number_of_users, ~] = size(expected);
 optimal_submission = zeros(number_of_users, 6);
 % Copy test user ids
 test_users = load_test_users();
 optimal_submission(:,1) = test_users;
-for i=1:number_of_submissions
-    current_submission = submission{i};
-    current_map = map_at_k_relevant(expected, current_submission, 1);
-    if current_map > best_map
-        best_map = current_map;
-        best_submission = current_submission;
+% Get 5 recommended items
+number_of_recommendations = 5;
+map = zeros(number_of_submissions,number_of_recommendations); 
+taken_from = cell(1,number_of_recommendations);
+%ri recommendation index
+for ri=1:number_of_recommendations
+    best_map = 0;
+    best_submission = {};
+    best_submission_index = 0;
+    for i=1:number_of_submissions
+        current_submission = submission{i};
+        % Only take the head of the submission into account for the map
+        current_map = map_at_k_relevant(expected, current_submission, 1);
+        if current_map > best_map
+            best_map = current_map;
+            best_submission = current_submission;
+            best_submission_index = i;
+        end
+        map(i,ri) = current_map;
     end
-    map(i) = current_map;
+    % Extract the first recommendations
+    best_recommendations = cellfun(@(array) array(1), best_submission);
+    % Store recommendations, first column is id
+    optimal_submission(:,ri+1) = best_recommendations;
+    % Remove already recommended
+    submission = remove_recommended(submission, best_recommendations);
+    % Save trace
+    %map(ri) = best_map; % map from that recommendation
+    taken_from{ri} = submission_files{best_submission_index,1}; %label
 end
-% Extract the first recommendations
-best_recommendations = cellfun(@(array) array(1),best_submission);
-optimal_submission(:,2) = best_recommendations;
-% Remove already recommended
-submission = remove_recommended(submission, best_recommendations);
-%Result
-map
+% Optimization trace
+map;
+taken_from;
+%% Evaluate
+% Check final map
+final_map = map_at_k_relevant(expected, optimal_submission, 5)
+
+%% Generate output
+write_submission_from_matrix(optimal_submission);
