@@ -7,7 +7,7 @@ submission_files = {
         'last' './submissions/last.csv'
         'bestAR' './submissions/bestAR.csv'
         'popular' './submissions/popular.csv'
-        'SVD' './submissions/svd.csv'
+        'spearman' './submissions/knnspearman.csv'
     };
 
 %% Execution
@@ -65,3 +65,14 @@ final_map = map_at_k_relevant(expected, optimal_submission, 5)
 
 %% Generate output
 write_submission_from_matrix(optimal_submission);
+
+%% Expected private leaderboard
+%Once submited change the public leaderboard score
+public_score=0.40415;
+private_score=(final_map - public_score *0.12)/0.88;
+%Best submission by LMV
+private_best=0.46702;
+public_best=0.39926;
+best_map=(private_best*0.88 + public_score *0.12);
+%Can we win?
+can_we_win = private_score > private_best
