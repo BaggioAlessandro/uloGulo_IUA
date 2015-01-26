@@ -2,10 +2,12 @@
 % submission files that will be considered
 % label, path
 submission_files = {
-        'soft' './submissions/soft.csv'
         'last+ar' './submissions/thelast+ar.csv'
+        'soft' './submissions/soft.csv'
+        'last' './submissions/last.csv'
         'bestAR' './submissions/bestAR.csv'
         'popular' './submissions/popular.csv'
+        'SVD' './submissions/svd.csv'
     };
 
 %% Execution
