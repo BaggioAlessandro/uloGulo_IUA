@@ -1,13 +1,17 @@
 %% Setup
+% Add functions folder to path to avoid call errors
+addpath(genpath('./functions'));
+
 % submission files that will be considered
 % label, path
 submission_files = {
-        'last+ar' './submissions/thelast+ar.csv'
-        'soft' './submissions/soft.csv'
-        'last' './submissions/last.csv'
-        'bestAR' './submissions/bestAR.csv'
-        'popular' './submissions/popular.csv'
-        'spearman' './submissions/knnspearman.csv'
+        'pureKNNwithLikes' './submissions/pureKNNwithLikes.csv'
+        'last+ar' './submissions/thelast+ar.csv'     
+        %'last' './submissions/last.csv'
+        %'spearman' './submissions/knnspearman.csv'
+        %'soft' './submissions/soft.csv'
+        %'bestAR' './submissions/bestAR.csv'
+        %'popular' './submissions/popular.csv'
     };
 
 %% Execution
@@ -68,7 +72,7 @@ write_submission_from_matrix(optimal_submission);
 
 %% Expected private leaderboard
 %Once submited change the public leaderboard score
-public_score=0.40415;
+public_score=0.40543;
 private_score=(final_map - public_score *0.12)/0.88;
 %Best submission by LMV
 private_best=0.46702;

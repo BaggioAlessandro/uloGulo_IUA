@@ -8,3 +8,4 @@
 *.arff
 MatLab/submission.csv
 .metadata/
+*.fig
