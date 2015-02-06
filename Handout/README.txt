@@ -9,6 +9,10 @@ FOR MATLAB:
         1) Run script "create_combined_submissions.m" from ./MATLAB/Hybrid folder
         2) Results are combined from submissions available under that folder and produce our final "submission.csv"
 
+FOR Java:
+    - In the Hybrid subfolder you can find the code to add Association Rules to a recommendation.
+    - In order to run the file you should change in the code the correct path of the recommendation to enhance, and the recommendation done with AR. Note that when producing the AR you should specified an integer for missing recommendation (that are going to be filled with the recommendation that should be enhanced), in our case this special number was "10000".
+
 FOR R (Association rules mining):
     This are the steps we followed on Windows
     1) Install R-Studio, an IDE for R
